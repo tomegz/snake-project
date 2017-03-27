@@ -1,6 +1,9 @@
+var range, color;
 function setup() {
     createCanvas(600, 600);
+    range = document.querySelector("input");
 }
 function draw() {
-    background(120);
+    color = range.value*2;
+    background(color);
 }
