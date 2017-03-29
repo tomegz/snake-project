@@ -1,17 +1,20 @@
-var snake, range, color, fr;
+var snake, food, range, color, fr;
 function setup() {
     var c = createCanvas(600, 600);
     var cHeight = c.height;
     var cWidth = c.width;
     range = document.querySelector("input");
     snake = new Snake(cHeight, cWidth);
+    food = new Food();
     fr = cHeight/snake.height;
     frameRate(10); // hardcoded for now
 }
 function draw() {
     color = getColor();
     background(color);
-    stroke(200);
+    stroke(100);
+    food.appear();
+    fill(255, 255, 255);
     snake.show();
     snake.update();
 }
