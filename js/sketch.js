@@ -12,10 +12,9 @@ function setup() {
 function draw() {
     color = getColor();
     background(color);
-    stroke(100);
-    food.appear();
     fill(255, 255, 255);
     snake.show();
+    food.appear();
     snake.update();
 }
 function keyPressed() {
