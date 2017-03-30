@@ -14,7 +14,8 @@ function draw() {
     background(color);
     fill(255, 255, 255);
     snake.show();
-    food.appear();
+    food.show();
+    food.update();
     snake.update();
 }
 function keyPressed() {

@@ -1,16 +1,29 @@
 function Food() {
     //private function to get new food position ON the grid instead of randomly
     var getNewPosition = function() {
+        //need to fix bug that makes food appear a little outside of grid
         return createVector(round15(randomNumber()), round15(randomNumber()));
     }
     this.size = createVector(15, 15);
     this.position = getNewPosition();
-    this.appear = function() {
+    this.show = function() {
         fill('red');
         rect(this.position.x, this.position.y, this.size.x, this.size.y);
     }
+    this.checkIfEaten = function() {
+        if(this.position.x - snake.x === 0 && this.position.y - snake.y === 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    this.update = function() {
+        if(this.checkIfEaten()){
+            this.position = getNewPosition();
+        }
+    }
 }
-//non related to Food helper functions
+//helper functions non related to Food 
 function round15(x) {
    return Math.ceil(x/15) * 15;
 }
