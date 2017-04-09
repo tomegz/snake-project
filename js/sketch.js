@@ -1,4 +1,5 @@
-var snake, food, range, color, fr;
+var snake, food, range, color, fr, nextDir;
+var directionQueue = [];
 function setup() {
     var c = createCanvas(600, 600);
     var cHeight = c.height;
@@ -21,16 +22,16 @@ function draw() {
 function keyPressed() {
     switch(keyCode) {
         case UP_ARROW:
-            snake.changeDirection(0, -1);
+            nextDir = snake.changeDirection(0, -1);
         break;
         case RIGHT_ARROW:
-            snake.changeDirection(1, 0);
+            nextDir = snake.changeDirection(1, 0);
         break;
         case DOWN_ARROW:
-            snake.changeDirection(0, 1);
+            nextDir = snake.changeDirection(0, 1);
         break;
         case LEFT_ARROW:
-            snake.changeDirection(-1, 0);
+            nextDir = snake.changeDirection(-1, 0);
         break;
     }
 }
