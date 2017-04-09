@@ -1,4 +1,12 @@
 function Snake(posX, posY) {
+    var checkExtreme = function(position, direction) {
+        if(position > 585 && direction === 1){
+            return -15;
+        } else if(position < 15 && direction === -1){
+            return 600;
+        }
+        return position;
+    }
     this.height = 15;
     this.width = 15;
     this.x = posX/2; //need to check if this could be vector
@@ -15,7 +23,6 @@ function Snake(posX, posY) {
     this.show = function() {
         //loop through body array and draw rectangles 
         for(var i=0; i < this.body.length; i++){
-            console.log("here");
             rect(this.body[i].x, this.body[i].y, this.height, this.width);
         }
     };
@@ -23,10 +30,12 @@ function Snake(posX, posY) {
         //loop through body array and update positions
         //this.body[0].x += this.velocity * this.direction.x;
         //this.body[0].y += this.velocity * this.direction.y;
-        for(var i = this.body.length - 1; i >= 0; i--){ // can i refactor this?
+        for(var i = this.body.length - 1, dirX, dirY; i >= 0; i--){ 
             if(i === 0){ // update snake's head
-                this.body[i].x += this.velocity * this.direction.x;
-                this.body[i].y += this.velocity * this.direction.y;
+                dirX = this.direction.x;
+                dirY = this.direction.y;
+                this.body[i].x = checkExtreme(this.body[i].x, dirX) + this.velocity * dirX;
+                this.body[i].y = checkExtreme(this.body[i].y, dirY) + this.velocity * dirY;
             } else { // each tail part gets position which is previous position of last tail part
                 this.body[i].x = this.body[i-1].x;
                 this.body[i].y = this.body[i-1].y;
