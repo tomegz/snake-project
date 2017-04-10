@@ -66,10 +66,15 @@ function Snake(posX, posY) {
             var head = this.body[0];
             for(var i = 1; i < this.body.length - 1; i++){
                 if (head.x === this.body[i].x && head.y === this.body[i].y){
-                    noLoop();
-                    console.log("You lost.");
+                    this.gameOver();
                 } 
             }
         }
+    }
+    this.gameOver = function() {
+        noLoop();
+        textSize(50);
+        textAlign(CENTER);
+        text("GAME OVER", 300, 300);
     }
 }
