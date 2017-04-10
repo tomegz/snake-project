@@ -7,6 +7,13 @@ function Snake(posX, posY) {
         }
         return position;
     }
+    var hasManyParts = function(body) {
+        if(body.length > 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
     this.height = 15;
     this.width = 15;
     this.x = posX/2; //need to check if this could be vector
@@ -32,7 +39,6 @@ function Snake(posX, posY) {
         for(var i = this.body.length - 1, dirX, dirY; i >= 0; i--){ 
             if(i === 0){ // update snake's head
                 if(this.directionQueue.length > 1){
-                    console.log("im about to shift");
                     this.direction = this.directionQueue.shift();
                 } else if(this.directionQueue.length === 1) {
                     this.direction = this.directionQueue[0];
@@ -54,5 +60,16 @@ function Snake(posX, posY) {
     this.newBodyPart = function() {
         var lastBodyPart = this.body[this.body.length - 1];
         return createVector(lastBodyPart.x + (15*this.direction.x), lastBodyPart.y + (15*this.direction.y));
+    }
+    this.checkIfAlive = function() {
+        if(hasManyParts(this.body)){
+            var head = this.body[0];
+            for(var i = 1; i < this.body.length - 1; i++){
+                if (head.x === this.body[i].x && head.y === this.body[i].y){
+                    noLoop();
+                    console.log("You lost.");
+                } 
+            }
+        }
     }
 }

@@ -7,13 +7,14 @@ function setup() {
     snake = new Snake(cHeight, cWidth);
     food = new Food();
     fr = cHeight/snake.height;
-    frameRate(10); // hardcoded for now
+    frameRate(20); // hardcoded for now
 }
 function draw() {
     color = getColor();
     background(color);
     fill(255, 255, 255);
     snake.show();
+    snake.checkIfAlive();
     food.show();
     food.update();
     snake.update();
