@@ -18,7 +18,8 @@ function Snake(posX, posY) {
     this.width = 15;
     this.x = posX/2; //need to check if this could be vector
     this.y = posY/2;
-    this.score = 1;
+    this.score = 0;
+    this.difficulty = 15;
     this.body = [createVector(this.x, this.y)];
     this.velocity = 15;
     this.direction = createVector(0, 0);
@@ -35,6 +36,9 @@ function Snake(posX, posY) {
             rect(this.body[i].x, this.body[i].y, this.height, this.width);
         }
     };
+    this.showScore = function() {
+        text("Score: " + this.score, 10, 20);
+    }
     this.update = function() {
         for(var i = this.body.length - 1, dirX, dirY; i >= 0; i--){ 
             if(i === 0){ // update snake's head
@@ -52,10 +56,12 @@ function Snake(posX, posY) {
                 this.body[i].y = this.body[i-1].y;
             }
         }
+        frameRate(this.difficulty);
     };
     this.grow = function() {
-        this.score += 1;
+        this.increaseScore();
         this.body.push(this.newBodyPart());
+        this.increaseDifficulty();
     }
     this.newBodyPart = function() {
         var lastBodyPart = this.body[this.body.length - 1];
@@ -71,6 +77,14 @@ function Snake(posX, posY) {
             }
         }
     }
+    this.increaseDifficulty = function() {
+        if (this.body.length % 3 === 0){ // increase difficulty every 3 snake's length
+          this.difficulty += 1;
+        }
+    };
+    this.increaseScore = function() {
+      this.score += Math.round(this.difficulty/2);
+    };
     this.gameOver = function() {
         noLoop();
         textSize(50);
