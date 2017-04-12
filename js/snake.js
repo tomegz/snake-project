@@ -16,8 +16,8 @@ function Snake(posX, posY) {
     }
     this.height = 15;
     this.width = 15;
-    this.x = posX/2; //need to check if this could be vector
-    this.y = posY/2;
+    this.x = posX; //need to check if this could be vector
+    this.y = posY;
     this.score = 0;
     this.difficulty = 15;
     this.body = [createVector(this.x, this.y)];
@@ -37,6 +37,8 @@ function Snake(posX, posY) {
         }
     };
     this.showScore = function() {
+        textAlign(LEFT);
+        textSize(20);
         text("Score: " + this.score, 10, 20);
     }
     this.update = function() {
@@ -72,6 +74,7 @@ function Snake(posX, posY) {
             var head = this.body[0];
             for(var i = 1; i < this.body.length - 1; i++){
                 if (head.x === this.body[i].x && head.y === this.body[i].y){
+                    //setTextSize();
                     this.gameOver();
                 } 
             }
@@ -87,8 +90,8 @@ function Snake(posX, posY) {
     };
     this.gameOver = function() {
         noLoop();
-        textSize(50);
         textAlign(CENTER);
+        textSize(50);
         text("GAME OVER", 300, 300);
     }
 }

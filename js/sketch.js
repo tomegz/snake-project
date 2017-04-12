@@ -1,17 +1,17 @@
-var snake, food, range, color, fr;
+var snake, food;
+var btn = document.createElement('button');
+btn.style.color = "black";
 function setup() {
     var c = createCanvas(600, 600);
     var cHeight = c.height;
     var cWidth = c.width;
-    range = document.querySelector("input");
-    snake = new Snake(cHeight, cWidth);
-    food = new Food();
-    fr = cHeight/snake.height;
-    frameRate(10); 
+    var btn = createButton();
+    showButton(btn, "Play");
+    handleClick(btn);
+    noLoop();  
 }
 function draw() {
-    color = getColor();
-    background(color);
+    background(60);
     fill(255, 255, 255);
     snake.show();
     snake.showScore();
@@ -36,6 +36,20 @@ function keyPressed() {
         break;
     }
 }
-function getColor() {
-    return range.value*2;
+function createButton() {
+    return document.createElement("button");
+}
+function showButton(button, label){
+    button.innerHTML = label;
+    document.body.appendChild(button);
+}
+function handleClick(button) {
+    button.addEventListener("click", resetSketch);
+}
+function resetSketch() {
+    snake = new Snake(300, 300);
+    food = new Food();
+    frameRate(10); 
+    //textSize(50);
+    loop();
 }
