@@ -93,5 +93,6 @@ function Snake(posX, posY) {
         textAlign(CENTER);
         textSize(50);
         text("GAME OVER", 300, 300);
+        showElement(menu);
     }
 }
