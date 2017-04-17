@@ -30,4 +30,11 @@
 #menu button:hover {
     background-color: #FFF;
 }
+#difficulty-bar {
+    width: 110px;
+}
+#difficulty-indicator {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
