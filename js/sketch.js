@@ -1,12 +1,14 @@
-var snake, food, menu, playBtn, settingsBtn;
+var snake, food, menu, playBtn, settingsBtn, difficultyBar, difficultyIndicator;
 function setup() {
     var c = createCanvas(600, 600);
     var cHeight = c.height;
     var cWidth = c.width;
     menu = document.getElementById("menu");
     playBtn = document.getElementById("play-button");
-    settingsBtn = document.getElementById("settings-button");
+    difficultyBar = document.getElementById("difficulty-bar");
+    difficultyIndicator = document.getElementById("difficulty-indicator");
     showElement(menu);
+    handleChange(difficultyBar);
     handleClick(playBtn);
     noLoop();  
 }
@@ -45,10 +47,20 @@ function hideElement(e) {
 function handleClick(button) {
     button.addEventListener("click", resetSketch);
 }
+function handleChange(range) {
+    range.addEventListener("input", showDifficulty);
+}
+function getDifficulty() {
+    return difficultyBar.value;
+}
+function showDifficulty() {
+    var diff = getDifficulty();
+    difficultyIndicator.innerText = "Difficulty: " + diff;
+}
 function resetSketch() {
     console.log("here");
     hideElement(menu);
-    snake = new Snake(300, 300);
+    snake = new Snake(300, 300, getDifficulty());
     food = new Food();
     frameRate(10); 
     //textSize(50);

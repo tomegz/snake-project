@@ -1,4 +1,4 @@
-function Snake(posX, posY) {
+function Snake(posX, posY, diff) {
     var checkExtreme = function(position, direction) {
         if(position >= 585 && direction === 1){
             return -15;
@@ -19,7 +19,7 @@ function Snake(posX, posY) {
     this.x = posX; //need to check if this could be vector
     this.y = posY;
     this.score = 0;
-    this.difficulty = 15;
+    this.difficulty = diff*2;
     this.body = [createVector(this.x, this.y)];
     this.velocity = 15;
     this.direction = createVector(0, 0);
