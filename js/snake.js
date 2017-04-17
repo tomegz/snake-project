@@ -19,7 +19,9 @@ function Snake(posX, posY, diff) {
     this.x = posX; //need to check if this could be vector
     this.y = posY;
     this.score = 0;
-    this.difficulty = diff*2;
+    this.startingDifficulty = Number(diff);
+    this.difficulty = Number(diff)*2;
+    this.bonus = this.startingDifficulty;
     this.body = [createVector(this.x, this.y)];
     this.velocity = 15;
     this.direction = createVector(0, 0);
@@ -64,6 +66,7 @@ function Snake(posX, posY, diff) {
         this.increaseScore();
         this.body.push(this.newBodyPart());
         this.increaseDifficulty();
+        this.increaseBonus();
     }
     this.newBodyPart = function() {
         var lastBodyPart = this.body[this.body.length - 1];
@@ -85,8 +88,11 @@ function Snake(posX, posY, diff) {
           this.difficulty += 1;
         }
     };
+    this.increaseBonus = function() {
+      this.bonus = Math.round((this.startingDifficulty * this.body.length)/10);  
+    };
     this.increaseScore = function() {
-      this.score += Math.round(this.difficulty/2);
+      this.score += Math.round(this.difficulty/2) + this.bonus;
     };
     this.gameOver = function() {
         noLoop();
